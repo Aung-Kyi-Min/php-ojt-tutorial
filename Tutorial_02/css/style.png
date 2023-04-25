@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+.pattern{
+  display: flex;
+  justify-content: center;
+}
+
+.diamond {
+  /*width: 100%;*/
+  margin-top: 3%;
+  /*margin-left: 50%;*/
+  font-size: 22px;
+}
+
+h2 {
+margin-top: 35%;
+/* margin-left: 5%; */
+text-align: center;
+}

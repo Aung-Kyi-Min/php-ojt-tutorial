@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+.pattern {
+  display: flex;                            /* fix  */
+  flex-direction: column;                   /* fix */
+  justify-content: center;                  /* fix  */
+  align-items: center;
+  height: 100vh;
+}
+
+.diamond {
+  margin-top: 3%;
+  font-size: 22px;
+}
