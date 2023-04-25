@@ -40,6 +40,4 @@ Route::get('/file-import',[StudentController::class,'importView'])->name('import
 Route::post('/import',[StudentController::class,'import'])->name('import');
 Route::get('/export-students',[StudentController::class,'exportStudents'])->name('export.students');
 
-//Route::get('/file-import',[StudentController::class,'importView'])->name('import-view');
-//Route::post('/import',[StudentController::class,'import'])->name('import');
-//Route::get('/export-users',[StudentController::class,'exportUsers'])->name('export.users');
+

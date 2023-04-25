@@ -11,6 +11,16 @@
   <div class="card mt-4">
     <div class="card-header">
       <h4>Students Lists</h4>
+      <div class="">
+        <form action="" class="float-end" method="GET">
+            <div class="form-group">
+                <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </div>
+        </form>
+      </div>
     </div>
     <div class="card-body">
       <table class="table table-strip">
