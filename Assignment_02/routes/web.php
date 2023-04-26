@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Majors\MajorController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
