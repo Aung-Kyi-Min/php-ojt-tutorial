@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Majors\MajorController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,4 +40,4 @@ Route::get('/file-import',[StudentController::class,'importView'])->name('import
 Route::post('/import',[StudentController::class,'import'])->name('import');
 Route::get('/export-students',[StudentController::class,'exportStudents'])->name('export.students');
 
-
+Route::get('/search',[SearchController::class,'search'])->name('students.search');
