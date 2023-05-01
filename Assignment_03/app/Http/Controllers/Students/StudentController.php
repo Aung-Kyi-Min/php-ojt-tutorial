@@ -15,6 +15,7 @@ use App\Imports\ImportStudent;
 use Illuminate\Http\Request;
 use App\Exports\ExportStudent;
 use App\Models\User;
+use GuzzleHttp\Psr7\Message;
 
 class StudentController extends Controller
 {
@@ -28,11 +29,9 @@ class StudentController extends Controller
 
     public function index(){
         $students = $this->studentService->getStudents();
-        //$majors = Major::select('id', 'name')->get();
-        $students = Student::with('major')->get();
+        $student = Student::with('major')->get();
 
-        return view('students.index', ['students' => $students]);
-    }
+        return view('students.index', ['students' => $students, 'student' => $student]);    }
 
     public function create(){
         $majors = Major::select('id', 'name')->get();
@@ -121,6 +120,33 @@ public function exportStudents()
 
         fclose($handle);
     }, 200, $headers);
+}
+
+public function search(Request $request){
+
+    $name = $request->input('search');
+
+    if($name == ''){
+        $results = [];
+        return view('Students.search',compact('results'));
+
+    }else {
+
+    $results = DB::table('students')
+            ->select('students.id','students.name','students.phone','students.email','students.address','majors.name as major')
+            ->join(DB::raw('majors'), 'majors.id', '=', 'students.majors')
+            ->where('students.name', 'LIKE', "%$name%")
+            ->orWhere('majors.name','LIKE',"%$name%")
+            ->orWhere('students.phone','LIKE',"%$name%")
+            ->orWhere('students.email','LIKE',"%$name%")
+            ->orWhere('students.address','LIKE',"%$name%")
+
+            ->paginate(3);
+
+    return view('Students.search', compact('results'));
+
+    }
+
 }
 
 }

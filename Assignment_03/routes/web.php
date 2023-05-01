@@ -25,7 +25,7 @@ Route::get('/students/create', [StudentController::class, 'create'])->name('stud
 Route::post('/students', [StudentController::class, 'store'])->name('students.store');
 Route::get('/students/{id}/edit', [StudentController::class, 'edit'])->name('students.edit');
 Route::put('/students/{id}', [StudentController::class, 'update'])->name('students.update');
-Route::delete('/students.destroy/{id}', [StudentController::class, 'destroy']);
+Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 
 
 Route::get('/majors', [MajorController::class, 'index'])->name('majors.index');
@@ -33,11 +33,11 @@ Route::get('/majors/create', [MajorController::class, 'create'])->name('majors.c
 Route::post('/majors', [MajorController::class, 'store'])->name('majors.store');
 Route::get('/majors/{id}/edit', [MajorController::class, 'edit'])->name('majors.edit');
 Route::put('/majors/{id}', [MajorController::class, 'update'])->name('majors.update');
-Route::delete('/majors.destroy/{id}', [MajorController::class, 'destroy']);
+Route::delete('/majors/{id}', [MajorController::class, 'destroy']);
 
 
 Route::get('/file-import',[StudentController::class,'importView'])->name('import-view');
 Route::post('/import',[StudentController::class,'import'])->name('import');
 Route::get('/export-students',[StudentController::class,'exportStudents'])->name('export.students');
 
-Route::get('/search',[SearchController::class,'search'])->name('students.search');
+Route::get('/search',[StudentController::class,'search'])->name('students.search');

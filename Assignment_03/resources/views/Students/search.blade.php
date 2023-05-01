@@ -14,7 +14,7 @@
           <form action="{{ route('students.search') }}" class="float-end" >
             @csrf
             <div class="input-group">
-                <input type="search" name="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <input type="search" name="search"  id="search" value="{{ old('search') }}" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                 <button type="submit" class="btn btn-outline-primary">search</button>
             </div>
           </form>
@@ -40,7 +40,7 @@
                         <input type="hidden" class="serdelete_val_id " value="{{$student->id}}">
                         <td>{{ $student->id }}</td>
                         <td>{{ $student->name }}</td>
-                        <td> {{ $student->major->name }}</td>
+                        <td> {{ $student->major }}</td>
                         <td>{{ $student->phone }}</td>
                         <td>{{ $student->email }}</td>
                         <td>{{ $student->address }}</td>
@@ -91,6 +91,7 @@
         $('.service_deletebtn').click(function (e){
             e.preventDefault();
             var delete_id = $(this).closest("tr").find(".serdelete_val_id").val();
+            console.log(delete_id);
             swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this data!",
@@ -106,7 +107,7 @@
                     };
                     $.ajax({
                         type: 'DELETE',
-                        url: "students.destroy/" + delete_id,
+                        url: "students/" + delete_id,
                         data: 'data',
                         success: function (response){
                             swal(response.status , {

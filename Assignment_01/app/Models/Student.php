@@ -20,8 +20,12 @@ class Student extends Model
 
     public function major()
     {
-        return $this->belongsTo(Major::class , 'majors');
+        return $this->belongsTo(Major::class ,'majors' );
     }
+
+    //public function major(){
+    //    return $this->hasMany(Major::class);
+    //}
 
 
 

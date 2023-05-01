@@ -28,10 +28,9 @@ class StudentController extends Controller
 
     public function index(){
         $students = $this->studentService->getStudents();
-        //$majors = Major::select('id', 'name')->get();
-        $students = Student::with('major')->get();
+        $student = Student::with('major')->get();
 
-        return view('students.index', ['students' => $students]);
+        return view('students.index', ['students' => $students, 'student' => $student]);
     }
 
     public function create(){
@@ -87,40 +86,45 @@ class StudentController extends Controller
         return redirect()->back()->with('message','File Imported Successfully...');
     }
 
-public function exportStudents()
-{
-    $StudentData = Student::with('major')->get();
+    public function exportStudents()
+    {
+        return Excel::download(new ExportStudent(), 'students.xlsx');
+    }
 
-    $headers = [
-        'Content-Type' => 'student/csv',
-        'Content-Disposition' => 'attachment; filename="students.csv"',
-    ];
-
-    return response()->streamDownload(function () use ($StudentData) {
-        $handle = fopen('php://output', 'w');
-
-        fputcsv($handle, [
-            'ID',
-            'name',
-            'majors',
-            'phone',
-            'email',
-            'address',
-        ]);
-
-        foreach ($StudentData as $row) {
-            fputcsv($handle, [
-                $row->id,
-                $row->name,
-                $row->major->name,
-                $row->phone,
-                $row->email,
-                $row->address,
-            ]);
-        }
-
-        fclose($handle);
-    }, 200, $headers);
-}
+//public function exportStudents()
+//{
+//    $StudentData = Student::with('major')->get();
+//
+//    $headers = [
+//        'Content-Type' => 'student/csv',
+//        'Content-Disposition' => 'attachment; filename="students.csv"',
+//    ];
+//
+//    return response()->streamDownload(function () use ($StudentData) {
+//        $handle = fopen('php://output', 'w');
+//
+//        fputcsv($handle, [
+//            'ID',
+//            'name',
+//            'majors',
+//            'phone',
+//            'email',
+//            'address',
+//        ]);
+//
+//        foreach ($StudentData as $row) {
+//            fputcsv($handle, [
+//                $row->id,
+//                $row->name,
+//                $row->major->name,
+//                $row->phone,
+//                $row->email,
+//                $row->address,
+//            ]);
+//        }
+//
+//        fclose($handle);
+//    }, 200, $headers);
+//}
 
 }

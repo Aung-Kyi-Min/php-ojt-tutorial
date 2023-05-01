@@ -22,15 +22,14 @@ class StudentController extends Controller
 
     public function index(){
         $students = $this->studentService->getStudents();
-        //$majors = Major::select('id', 'name')->get();
-        $students = Student::with('major')->get();
+        $student = Student::with('major')->get();
 
-        return view('students.index', ['students' => $students]);
+        return view('students.index', ['students' => $students, 'student' => $student]);
     }
 
     public function create(){
         $majors = Major::select('id', 'name')->get();
-        return view('Students.create', compact('majors'));
+        return view('students.create', compact('majors'));
     }
 
     public function store(StudentCreateRequest $request){
@@ -50,7 +49,7 @@ class StudentController extends Controller
         $majors = Major::select('id', 'name')->get();
         $students = Student::with('major')->get();
 
-        return view('Students.edit',compact('student','majors','students'));
+        return view('students.edit',compact('student','majors','students'));
     }
 
 

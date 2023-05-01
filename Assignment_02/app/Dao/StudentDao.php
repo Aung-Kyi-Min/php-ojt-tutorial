@@ -13,7 +13,7 @@ class StudentDao implements StudentDaoInterface
      */
     public function getStudents(): object
     {
-        return Student::latest()->paginate(10);
+        return Student::paginate(3);
     }
 
     /**
