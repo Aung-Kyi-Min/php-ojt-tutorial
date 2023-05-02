@@ -74,13 +74,13 @@ function show()
     $files = glob('images/*/*.{jpg,png,jpeg}', GLOB_BRACE); //find file path
     foreach ($files as $file) {
         $folder = basename($file); //file name from path
-        echo "<div class='col-md-4 mb-3'>
-            <img src='$file' class='img-thumbnail w-100 border-dark' style='width: 300px; height:250px'>
-            <p class='mt-3 fs-5 text-center'>$folder</p><br>
-            <p class='mt-0 w-30 ms-2 p-3 me-2'><a href='$file' class=' '>localhost/Tutorial_06/$file</a></p>
+        echo "<div class='col-md-4 mb-1'>
+            <img src='$file' class='img-thumbnail w-100 h-50  border-dark'>
+            <p class='mt-0 fs-5 text-center'>$folder</p><br>
+            <p class='mt-0 w-30 ms-2 me-2'><a href='$file' class=' '>localhost/Tutorial_06/$file</a></p>
             <form method='post' class='w-100'>
               <input type='hidden' name='file_path' value='$file'>
-              <input type='submit' class='btn btn-danger w-100  mb-3 text-dark' name='delete' value='Delete'>
+              <input type='submit' class='btn btn-danger w-100 text-dark' name='delete' value='Delete'>
             </form>
             </div>";
     }

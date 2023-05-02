@@ -37,6 +37,7 @@
                         <input type="email" value="{{ old('email') }}" name="email" id="email"
                             class="form-control " placeholder="email">
                         <span id="emailError"></span>
+                        <span id="duplicate"></span>
                     </div>
                     <div class=" form-outline mb-3">
                         <label for="">Address</label>
@@ -104,14 +105,17 @@
                             $phoneError.innerHTML = $emailError.innerHTML =
                             $addressError.innerHTML = '';
                     }
-                    if(response.data.message== 'The given data was invalid.'){
-                        $emailError = document.getElementById('emailError');
-                        $emailError.innerHTML = '<i class="text-danger">' + response.data.errors.email + '</i>' ;
-                    }
                 })
                 .catch(error => {
                     console.log(error.response);
+
                     if (error.response.status === 422) {
+
+                        if (error.response.data.message == 'The given data was invalid.') {
+                            $duplicate = document.getElementById('duplicate');
+                            $duplicate.innerHTML = '<i class="text-danger">' + error.response.data.errors.email +
+                                '</i>';
+                        }
 
                         $nameError = document.getElementById('nameError');
                         $majorsError = document.getElementById('majorsError');

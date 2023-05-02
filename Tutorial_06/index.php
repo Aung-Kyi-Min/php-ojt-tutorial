@@ -59,12 +59,10 @@ endif;
     </div>
   </div>
     <div class="card d-flex align-items-center justify-content-center mx-auto w-75  mt-5">
-      <div class="card-body">
+      <div class="card-body w-75">
       <div class="row  mt-5">
 
-        <?php
-    show();
-    ?>
+<?php  show();  ?>
       </div>
       </div>
     </div>
