@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+//session_start();
 include 'upload.php';
 
 ?>
@@ -63,8 +63,8 @@ endif;
       <div class="row  mt-5">
 
         <?php
-show();
-?>
+    show();
+    ?>
       </div>
       </div>
     </div>
