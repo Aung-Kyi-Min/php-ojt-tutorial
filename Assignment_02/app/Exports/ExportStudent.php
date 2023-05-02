@@ -2,25 +2,20 @@
 
 namespace App\Exports;
 
-use App\Models\Student;
 use App\Models\Major;
+use App\Models\Student;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
 class ExportStudent implements FromCollection
- , WithHeadings, WithMapping
+, WithHeadings, WithMapping
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
-        //$student = Student::all();
-        //$student = Student::with('major')->get();
-
-        //return ['student' , $student];
-
         return Student::all();
     }
 
@@ -34,7 +29,7 @@ class ExportStudent implements FromCollection
             'Email',
             'Address',
             'Created At',
-            'Updated At'
+            'Updated At',
         ];
     }
 
@@ -48,10 +43,7 @@ class ExportStudent implements FromCollection
             $student->phone,
             $student->address,
             $student->created_at,
-            $student->updated_at
+            $student->updated_at,
         ];
     }
-
-
-
 }

@@ -30,11 +30,6 @@ index.php
 README.md
 ```
 
-## Index Page Design
-![index.png](demo/index.png);
-
-<hr>
-
 ## Weekly Graph Design
 ![weekly.png](demo/weekly.png)
 

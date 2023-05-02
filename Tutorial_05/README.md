@@ -10,7 +10,7 @@
 │   ├── reset.css
 │   └── style.css
 ├── demo/
-│   └── Tuto_05.png
+│   └── text.png
 ├── files/
 │   └── sample.csv
 │   └── sample.doc
@@ -21,4 +21,4 @@
 └── README.md
 ```
 
-![Tuto_05.png](demo/Tuto_05.png)
+![text.png](demo/Tutorial_05.png)

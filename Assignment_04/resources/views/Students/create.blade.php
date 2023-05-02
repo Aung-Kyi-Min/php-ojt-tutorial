@@ -104,6 +104,10 @@
                             $phoneError.innerHTML = $emailError.innerHTML =
                             $addressError.innerHTML = '';
                     }
+                    if(response.data.message== 'The given data was invalid.'){
+                        $emailError = document.getElementById('emailError');
+                        $emailError.innerHTML = '<i class="text-danger">' + response.data.errors.email + '</i>' ;
+                    }
                 })
                 .catch(error => {
                     console.log(error.response);
