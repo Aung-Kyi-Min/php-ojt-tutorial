@@ -17,11 +17,11 @@ if (isset($_POST['update'])) {
     $query_run = mysqli_query($conn, $query);
     if ($query_run) {
         $_SESSION['message'] = "Post Updated Successfully...";
-        echo "<script>window.location='index.php'</script>";
+        echo "<script>window.location='index.php';</script>";
         exit(0);
     } else {
         $_SESSION['message'] = "Post Not Updated...";
-        echo "<script>window.location='index.php'</script>";
+        echo "<script>window.location='index.php';</script>";
         exit(0);
     }
 }
@@ -79,7 +79,7 @@ endif;
                           <textarea class="form-control" id="content" name="content" rows="4"><?=$post['content'];?></textarea>
                         </div>
                         <div class="mb-3">
-                          <input class="form-check-input" type="checkbox" value='' name="publish" id="publish" <?php if($post['is_published']==1) echo 'checked="checked"'; ?>>
+                          <input class="form-check-input" type="checkbox" value='' name="publish" id="publish" <?php if($post['is_published']=='1') echo 'checked="checked"'; ?>>
                           <label class="form-check-label" for="publish">
                             Publish
                           </label>

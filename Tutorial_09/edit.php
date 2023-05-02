@@ -79,7 +79,7 @@ endif;
                           <textarea class="form-control" id="content" name="content" rows="4"><?=$post['content'];?></textarea>
                         </div>
                         <div class="mb-3">
-                          <input class="form-check-input" type="checkbox" value='' name="publish" id="publish" <?php if($post['is_published']==1) echo 'checked="checked"'; ?>>
+                          <input class="form-check-input" type="checkbox" value="" name="publish" id="publish" <?php if($post['is_published']== '1') echo 'checked="checked"'; ?>>
                           <label class="form-check-label" for="publish">
                             Publish
                           </label>

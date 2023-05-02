@@ -68,9 +68,9 @@ endif;
               <tbody>
               <?php
 if (mysqli_num_rows($query_run) > 0) {
-  $newdate = strtotime($post['created_datetime']);
-  $showdate = date("M-D-Y", $newdate);
     foreach ($query_run as $post) {
+      $newdate = strtotime($post['created_datetime']);
+      $showdate = date("M-D-Y", $newdate);
         ?>
                   <tr>
                     <td><?=$post['id'];?></td>
