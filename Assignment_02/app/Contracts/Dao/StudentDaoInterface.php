@@ -41,4 +41,5 @@ interface StudentDaoInterface
      * @return void
      */
     public function deleteStudentById(int $id): void;
+
 }

@@ -4,6 +4,8 @@ namespace App\Dao;
 
 use App\Contracts\Dao\StudentDaoInterface;
 use App\Models\Student;
+use App\Exports\ExportStudent;
+use Maatwebsite\Excel\Excel;
 
 class StudentDao implements StudentDaoInterface
 {
@@ -70,4 +72,5 @@ class StudentDao implements StudentDaoInterface
         $student = Student::findOrFail($id);
         $student->delete();
     }
+
 }

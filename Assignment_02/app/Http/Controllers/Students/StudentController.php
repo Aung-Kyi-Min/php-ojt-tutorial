@@ -34,7 +34,7 @@ class StudentController extends Controller
     public function create()
     {
         $majors = Major::select('id', 'name')->get();
-        return view('Students.create', compact('majors'));
+        return view('students.create', compact('majors'));
     }
 
     public function store(StudentCreateRequest $request)
@@ -56,7 +56,7 @@ class StudentController extends Controller
         $majors = Major::select('id', 'name')->get();
         $students = Student::with('major')->get();
 
-        return view('Students.edit', compact('student', 'majors', 'students'));
+        return view('students.edit', compact('student', 'majors', 'students'));
     }
 
     public function update(StudentUpdateRequest $request, $id)
@@ -84,8 +84,10 @@ class StudentController extends Controller
     }
 
     public function import(Request $request)
+
     {
-        Excel::import(new ImportStudent, $request->file('file')->store('files'));
+
+        Excel::import(new ImportStudent, $request->file);
         return redirect()->back()->with('message', 'File Imported Successfully...');
     }
 

@@ -22,7 +22,7 @@ class ExportStudent implements FromCollection
     public function headings(): array
     {
         return [
-            '#',
+            'Id',
             'Name',
             'Majors',
             'Phone',
@@ -38,7 +38,7 @@ class ExportStudent implements FromCollection
         return [
             $student->id,
             $student->name,
-            $student->major()->pluck('name'),
+            $student->major->name,
             $student->email,
             $student->phone,
             $student->address,
