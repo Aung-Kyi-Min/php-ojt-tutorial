@@ -27,7 +27,7 @@ class StudentCreateRequest extends FormRequest
             'name' => ['required', 'max:255'],
             'majors' => ['required', 'max:255'],
             'phone' => ['required', 'max:100'],
-            'email' => ['required', 'max:255', 'email', 'unique:students,email',$this->id],
+            'email' => ['required', 'max:255', 'email', 'unique:students,email', [ 'email.unique' => 'This email address is already in use.']],
             'address' => ['required', 'max:225'],
         ];
     }

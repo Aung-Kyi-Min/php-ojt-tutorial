@@ -4,13 +4,12 @@ $path = "images/";
 if (!is_dir($path)) {
     mkdir($path);
 }
-$name = $_POST['name'];
-$Qname = $name . '.png';
-$file = $path . $name . '.png';
 
 $text = "";
 if (isset($_POST['submit'])) {
     $name = $_POST['name']; // changes
+    $Qname = $name . '.png';
+$file = $path . $name . '.png';
     if (isset($_POST['name'])) {
         $text = "Name: " . $_POST['name'] . "\n";
     }

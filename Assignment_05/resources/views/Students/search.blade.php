@@ -40,7 +40,7 @@
                         <input type="hidden" class="serdelete_val_id " value="{{$student->id}}">
                         <td>{{ $student->id }}</td>
                         <td>{{ $student->name }}</td>
-                        <td> {{ $student->major->name }}</td>
+                        <td> {{ $student->major }}</td>
                         <td>{{ $student->phone }}</td>
                         <td>{{ $student->email }}</td>
                         <td>{{ $student->address }}</td>
@@ -53,15 +53,17 @@
                         </td>
                     </tr>
                     @endforeach
-                    @else
-                        <p>No results found.</p>
-                    @endif
+
 
         </tbody>
     </table>
     <div class="pagination-block">
         {{  $results->appends(request()->input())->links('layouts.paginationlinks') }}
     </div>
+    @else
+    <p>No results found.</p>
+@endif
+
   </div>
 </div>
 </div>

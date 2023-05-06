@@ -35,7 +35,7 @@ class StudentController extends Controller
 
     public function create(){
         $majors = Major::select('id', 'name')->get();
-        return view('Students.create', compact('majors'));
+        return view('students.create', compact('majors'));
     }
 
     public function store(StudentCreateRequest $request){
@@ -55,7 +55,7 @@ class StudentController extends Controller
         $majors = Major::select('id', 'name')->get();
         $students = Student::with('major')->get();
 
-        return view('Students.edit',compact('student','majors','students'));
+        return view('students.edit',compact('student','majors','students'));
     }
 
 
@@ -78,72 +78,41 @@ class StudentController extends Controller
 
 
     public function importView(){
-        return view('Students.upload');
+        return view('students.upload');
     }
 
     public function import(Request $request){
-        Excel::import(new ImportStudent, $request->file('file')->store('files'));
-        return redirect()->back()->with('message','File Imported Successfully...');
+        Excel::import(new ImportStudent, $request->file);
+        return redirect()->back()->with('message', 'File Imported Successfully...');
     }
 
-public function exportStudents()
-{
-    $StudentData = Student::with('major')->get();
+    public function exportStudents()
+    {
+        return Excel::download(new ExportStudent(), 'students.xlsx');
+    }
 
-    $headers = [
-        'Content-Type' => 'student/csv',
-        'Content-Disposition' => 'attachment; filename="students.csv"',
-    ];
+    public function search(Request $request){
 
-    return response()->streamDownload(function () use ($StudentData) {
-        $handle = fopen('php://output', 'w');
+        $name = $request->input('search');
 
-        fputcsv($handle, [
-            'ID',
-            'name',
-            'majors',
-            'phone',
-            'email',
-            'address',
-        ]);
+        if($name == ''){
+            $results = [];
+            return view('students.search',compact('results'));
 
-        foreach ($StudentData as $row) {
-            fputcsv($handle, [
-                $row->id,
-                $row->name,
-                $row->major->name,
-                $row->phone,
-                $row->email,
-                $row->address,
-            ]);
-        }
+        }else {
 
-        fclose($handle);
-    }, 200, $headers);
-}
+        $results = DB::table('students')
+                ->select('students.id','students.name','students.phone','students.email','students.address','majors.name as major')
+                ->join(DB::raw('majors'), 'majors.id', '=', 'students.majors')
+                ->where('students.name', 'LIKE', "%$name%")
+                ->orWhere('majors.name','LIKE',"%$name%")
+                ->orWhere('students.phone','LIKE',"%$name%")
+                ->orWhere('students.email','LIKE',"%$name%")
+                ->orWhere('students.address','LIKE',"%$name%")
 
-public function search(Request $request){
+                ->paginate(3);
 
-    $name = $request->input('search');
-
-    if($name == ''){
-        $results = [];
-        return view('Students.search',compact('results'));
-
-    }else {
-
-    $results = DB::table('students')
-            ->select('students.id','students.name','students.phone','students.email','students.address','majors.name as major')
-            ->join(DB::raw('majors'), 'majors.id', '=', 'students.majors')
-            ->where('students.name', 'LIKE', "%$name%")
-            ->orWhere('majors.name','LIKE',"%$name%")
-            ->orWhere('students.phone','LIKE',"%$name%")
-            ->orWhere('students.email','LIKE',"%$name%")
-            ->orWhere('students.address','LIKE',"%$name%")
-
-            ->paginate(3);
-
-    return view('Students.search', compact('results'));
+        return view('students.search', compact('results'));
 
     }
 

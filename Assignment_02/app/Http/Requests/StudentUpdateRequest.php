@@ -28,7 +28,7 @@ class StudentUpdateRequest extends FormRequest
             'name' => ['required', 'max:255'],
             'majors' => ['required', 'max:255'],
             'phone' => ['required', 'max:100'],
-            'email' => ['required', 'max:255', 'email', 'unique:users,email'],
+            'email' => ['required', 'max:255', 'email', 'unique:students,email'],
             'address' => ['required', 'max:225'],
         ];
     }

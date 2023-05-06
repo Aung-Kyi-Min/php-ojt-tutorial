@@ -8,20 +8,16 @@
             </div>
             <div class="card-body">
                 <form name="editForm" method="post">
-
-
                     <div class="mb-3">
                         <input type="hidden" name="update_id" id="update_id" value="{{ $student->id }}">
                         <label for="">Name</label>
                         <input type="text" name="name" id="name" value="{{ old('name', $student->name) }}"
-                            class="form-control @error('name') is invalid @enderror">
-                        @error('name')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                            class="form-control">
+                        <span id="nameError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="">Major</label>
-                        <select name="majors" class="form-select @error('majors') is-invalid @enderror">
+                        <select name="majors" class="form-select">
                             @foreach ($majors as $major)
                                 <option value="{{ $major->id }}"
                                     {{ old('majors', $student->majors) == $major->id ? 'selected' : '' }}>
@@ -29,35 +25,26 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('majors')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="">Phone</label>
                         <input type="text" name="phone" id="phone" value="{{ old('phone', $student->phone) }}"
-                            class="form-control @error('phone') is invalid @enderror">
-                        @error('phone')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                            class="form-control">
+                        <span id="phoneError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="">Email</label>
                         <input type="email" name="email" id="email" value="{{ old('email', $student->email) }}"
-                            class="form-control @error('email') is invalid @enderror">
-                        @error('email')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                            class="form-control">
+                        <span id="emailError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="">Address</label>
                         <textarea name="address" id="address" rows="3" value="{{ old('address', $student->address) }}"
-                            class="form-control @error('address') is invalid @enderror">
+                            class="form-control">
                     {{ $student->address }}
                 </textarea>
-                        @error('address')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        <span id="addressError"></span>
                     </div>
                     <div class="mb-3">
                         <a href="{{ route('students.index') }}" class="btn btn-secondary btn-sm">Back</a>
@@ -110,7 +97,30 @@
                     console.log(response);
                     console.log(response.data.msg);
                 })
-                .catch(error => console.log(error));
+                .catch(error => {
+                    console.log(error.response);
+                    if (error.response.status === 422) {
+                        $nameError = document.getElementById('nameError');
+                        $majorsError = document.getElementById('majorsError');
+                        $phoneError = document.getElementById('phoneError');
+                        $emailError = document.getElementById('emailError');
+                        $addressError = document.getElementById('addressError');
+                        $nameInput = document.getElementById('name');
+                        $phoneInput = document.getElementById('phone');
+                        $emailInput = document.getElementById('email');
+                        $addressInput = document.getElementById('address');
+                        $nameError.innerHTML = $nameInput.value == '' ?
+                            '<i class="text-danger">' + error.response.data.errors.name + '</i>' : '';
+                        $phoneError.innerHTML = phoneInput.value == '' ?
+                            '<i class="text-danger">' + error.response.data.errors.phone + '</i>' : '';
+                        $emailError.innerHTML = emailInput.value == '' ?
+                            '<i class="text-danger">' + error.response.data.errors.email + '</i>' : '';
+                        $addressError.innerHTML = addressInput.value == '' ?
+                            '<i class="text-danger">' + error.response.data.errors.address + '</i>' : '';
+
+                    }
+
+                });
 
         }
     </script>

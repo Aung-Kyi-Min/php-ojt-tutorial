@@ -6,7 +6,8 @@ if (isset($_POST['update'])) {
     $post_id = mysqli_real_escape_string($conn,$_POST['pt_id']);
     $title = mysqli_real_escape_string($conn,$_POST['title']);
     $content = mysqli_real_escape_string($conn,$_POST['content']);
-    $publish = mysqli_real_escape_string($conn,$_POST['publish']);
+    //$publish = mysqli_real_escape_string($conn,$_POST['publish']);
+    $publish = $_POST['publish'];
     if (isset($publish)) {
         $publish = '1';
     } else {

@@ -15,7 +15,6 @@ class ImportStudent implements ToModel , WithHeadingRow
     */
     public function model(array $row)
     {
-        dd($row);
         return new Student([
             'name' => $row['name'],
             'majors' => $row['majors'],
